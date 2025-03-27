@@ -16,8 +16,7 @@ import Scene3D from './components/Scene3D';
 import CustomCursor from './components/CustomCursor';
 import AnimatedLogo from './components/AnimatedLogo';
 import LoadingScreen from './components/LoadingScreen';
-import HeroBackground from './components/HeroBackground';
-import { ServiceCardSkeleton, HeroSkeleton, StatsSkeleton } from './components/Skeleton';
+import { ServiceCardSkeleton, HeroSkeleton } from './components/Skeleton';
 
 gsap.registerPlugin(ScrollTrigger);
 
