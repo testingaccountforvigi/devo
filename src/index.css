@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@600,700,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+@layer base {
+  body {
+    @apply bg-primary text-white min-h-screen font-sans antialiased overflow-x-hidden;
+    text-rendering: optimizeLegibility;
+    cursor: none;
+  }
+
+  a, button, [role="button"] {
+    cursor: none;
+  }
+
+  ::selection {
+    @apply bg-accent/30 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-primary;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-accent/20 rounded-full hover:bg-accent/40 transition-colors;
+  }
+}
+
+/* Custom Cursor Styles */
+.cursor-dot {
+  @apply fixed pointer-events-none z-50;
+  width: 8px;
+  height: 8px;
+  background: theme('colors.accent');
+  border-radius: 50%;
+  transition: scale 0.15s ease;
+  mix-blend-mode: screen;
+}
+
+.cursor-ring {
+  @apply fixed pointer-events-none z-50;
+  width: 40px;
+  height: 40px;
+  border: 2px solid theme('colors.accent');
+  border-radius: 50%;
+  margin-left: -16px;
+  margin-top: -16px;
+  transition: scale 0.15s ease;
+  mix-blend-mode: screen;
+}
+
+.cursor-trail {
+  @apply fixed pointer-events-none;
+  width: 8px;
+  height: 8px;
+  background: theme('colors.accent');
+  border-radius: 50%;
+  margin-left: 0px;
+  margin-top: 0px;
+  transition: scale 0.3s ease;
+  mix-blend-mode: screen;
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent via-accent-light to-accent bg-[length:200%] animate-gradient;
+  }
+
+  .hero-gradient {
+    @apply absolute inset-0;
+    background: radial-gradient(circle at center, 
+      rgba(99, 102, 241, 0.15) 0%,
+      rgba(79, 70, 229, 0.1) 25%,
+      rgba(0, 0, 0, 0) 70%
+    );
+    filter: blur(80px);
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-accent/20;
+  }
+
+  .nav-link {
+    @apply relative py-2 text-gray-300 hover:text-white transition-colors;
+  }
+
+  .nav-link::after {
+    @apply content-[''] absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .button-primary {
+    @apply bg-accent hover:bg-accent-light px-8 py-4 rounded-full font-semibold inline-flex items-center gap-2 transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 relative overflow-hidden;
+  }
+
+  .button-primary::before {
+    @apply content-[''] absolute inset-0 bg-white/20 translate-x-[-100%] skew-x-[-20deg] transition-transform duration-300;
+  }
+
+  .button-primary:hover::before {
+    @apply translate-x-[100%];
+  }
+
+  .button-secondary {
+    @apply border border-gray-700 hover:border-accent px-8 py-4 rounded-full font-semibold inline-flex items-center gap-2 transition-all duration-300 hover:bg-accent/10 relative overflow-hidden;
+  }
+
+  .button-secondary::before {
+    @apply content-[''] absolute inset-0 bg-accent/5 translate-x-[-100%] skew-x-[-20deg] transition-transform duration-300;
+  }
+
+  .button-secondary:hover::before {
+    @apply translate-x-[100%];
+  }
+
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl relative overflow-hidden shadow-lg shadow-black/5;
+  }
+
+  .glass-card::before {
+    @apply content-[''] absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] transition-transform duration-500;
+  }
+
+  .glass-card:hover::before {
+    @apply translate-x-[100%];
+  }
+
+  .service-card {
+    @apply relative backdrop-blur-xl border border-white/10 rounded-2xl;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.05)
+    );
+    box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2),
+                0 2px 8px -1px rgba(0, 0, 0, 0.1),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0)
+    );
+    -webkit-mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+    mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .service-card:hover {
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.15),
+      rgba(255, 255, 255, 0.1)
+    );
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+    transform: translateY(-8px);
+  }
+
+  .section-heading {
+    @apply text-3xl md:text-4xl font-display font-bold;
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 3D Scene Styles */
+.canvas-container {
+  @apply fixed inset-0 pointer-events-none;
+}
+
+.canvas-container canvas {
+  @apply touch-none;
+}
